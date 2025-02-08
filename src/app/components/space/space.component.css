@@ -1,0 +1,13 @@
+:host {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+canvas {
+    display: block; /* Empêche les marges internes */
+    width: 100%;
+    height: 100%;
+}
