@@ -3,6 +3,7 @@ import { PerspectiveCamera, WebGLRenderer, Scene, Color } from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 import { PlanetComponent } from '../planet/planet.component';
+import { StarsComponent } from '../stars/stars.component';
 
 @Component({
   selector: 'app-space',
@@ -12,7 +13,8 @@ import { PlanetComponent } from '../planet/planet.component';
 })
 export class SpaceComponent {
     @ViewChild('canvas', { static: true }) canvasElement!: ElementRef;
-    @ContentChildren(PlanetComponent) children!: QueryList<PlanetComponent>;
+    @ContentChildren(PlanetComponent) planetChildren!: QueryList<PlanetComponent>;
+    @ContentChildren(StarsComponent) starsChildren!: QueryList<StarsComponent>;
     @Input() public orbitControls: boolean = true;
 
     private scene!: Scene;
@@ -23,14 +25,12 @@ export class SpaceComponent {
     private initThreeJs(): void {
         this.scene = new Scene();
         this.scene.background = new Color(0x000000);
-        this.camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        this.camera.position.z = 5;
     
         this.renderer = new WebGLRenderer({ canvas: this.canvas });
         this.renderer.setSize(window.innerWidth, window.innerHeight);            
 
         let aspectRatio = this.aspectRatio;
-        this.camera = new PerspectiveCamera(1, aspectRatio, 1, 1000);
+        this.camera = new PerspectiveCamera(1, aspectRatio, 1, 10000);
         this.camera.position.z = 800;
 
         window.addEventListener('resize', () => this.onWindowResize());
@@ -41,6 +41,7 @@ export class SpaceComponent {
     private InitOrbitControls(){
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.controls.enableDamping = true;
+        this.controls.enablePan = false;
         this.controls.dampingFactor = 0.25;
         this.controls.screenSpacePanning = false;
     }
@@ -60,7 +61,14 @@ export class SpaceComponent {
     }
 
     private addChildrens(): void {
-        this.children.forEach(child => {
+        this.planetChildren.forEach(child => {
+            console.log(child)
+            if (!child.mesh) return;
+            this.scene.add(child.mesh);
+        });
+
+        this.starsChildren.forEach(child => {
+            console.log(child)
             if (!child.mesh) return;
             this.scene.add(child.mesh);
         });
@@ -74,7 +82,7 @@ export class SpaceComponent {
     public animate() {
         requestAnimationFrame(() => this.animate());
 
-        this.children.forEach(child => {
+        this.planetChildren.forEach(child => {
             if (!child.animate) return;
             child.animate();
         });
