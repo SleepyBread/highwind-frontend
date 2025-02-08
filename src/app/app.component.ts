@@ -9,5 +9,5 @@ import { SpaceComponent } from './components/space/space.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'TJ';
+  title = 'HighwindFrontend';
 }
