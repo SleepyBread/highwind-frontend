@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { PlanetComponent } from './components/planet/planet.component';
+import { SpaceComponent } from './components/space/space.component';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
+  imports: [SpaceComponent, PlanetComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'highwind-frontend';
+  title = 'HighwindFrontend';
 }
