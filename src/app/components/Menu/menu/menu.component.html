@@ -1,0 +1,53 @@
+<div class="center-div">
+  <h1>Menu</h1>
+
+  <p>Vaisseau spatiale :</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Masse</mat-label>
+    <input matInput placeholder="Masse">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Coordonnée X</mat-label>
+    <input matInput placeholder="100">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Coordonnée Y</mat-label>
+    <input matInput placeholder="100">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Aire de la voile</mat-label>
+    <input matInput placeholder="100 m2">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Angle voile</mat-label>
+    <input matInput placeholder="100 rad">
+  </mat-form-field>
+
+  <button mat-flat-button>Envoyer</button>
+</div>
+
+<hr>
+
+<div class="center-div">
+  <p>Date de la démo :</p>
+  <mat-form-field class="example-form-field">
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="datepicker" />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+    <mat-datepicker #datepicker>
+      <mat-datepicker-actions>
+        <button mat-button matDatepickerCancel>Cancel</button>
+        <button mat-raised-button matDatepickerApply>Apply</button>
+      </mat-datepicker-actions>
+    </mat-datepicker>
+  </mat-form-field>
+
+  <p>Résultat :</p>
+  <p>Tada</p>
+</div>
+
