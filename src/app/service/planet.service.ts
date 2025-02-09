@@ -69,7 +69,7 @@ export class PlanetService {
 
   async getPlanetsLocations() {
     let planets: { [key: string]: any } = {};
-
+    
     for (let p in this.planets_data) {
       let data = await firstValueFrom(this.http.get('/planet-api', 
         {params:{
