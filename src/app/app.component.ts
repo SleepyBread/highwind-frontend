@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 import { PlanetComponent } from './components/planet/planet.component';
 import { SpaceComponent } from './components/space/space.component';
@@ -9,10 +9,10 @@ import { OrbitComponent } from './components/orbit/orbit.component';
 import { CircularAnimationComponent } from './components/circularAnimation/circularAnimation.component';
 import { PlanetService } from './service/planet.service';
 import { Planet } from './class/planet';
-
+import { FormsModule } from '@angular/forms';
 @Component({
     selector: 'app-root',
-    imports: [SpaceComponent, PlanetComponent, StarsComponent, OrbitComponent, CircularAnimationComponent, MatGridList, MatGridTile, MenuComponent],
+    imports: [FormsModule,SpaceComponent, PlanetComponent, StarsComponent, OrbitComponent, CircularAnimationComponent, MatGridList, MatGridTile, MenuComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
@@ -27,6 +27,10 @@ export class AppComponent {
           "radius": 24622
         },
       }
+
+      public speed = 1;
+      public dateSimu = new Date();
+
 
     public planets: Planet[] = [
         {
@@ -180,4 +184,8 @@ export class AppComponent {
     async init() {
         console.log(await this.planetService.getPlanetsLocations(this.planets))
     }
+
+  onSpeedChange(newSpeed: number) {
+    this.speed = newSpeed;
+  }
 }

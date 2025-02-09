@@ -1,16 +1,16 @@
 
 <mat-grid-list cols="5" rowHeight="100%">
   <mat-grid-tile >
-    <app-menu></app-menu>
+    <app-menu [vitesse]="speed" [dateSimulatire]="dateSimu" (vitesseChange)="onSpeedChange($event)"  ></app-menu>
   </mat-grid-tile>
   <mat-grid-tile colspan="4">
     <app-space>
-    <app-planet [size]="7e5" [texture]="textureSun"></app-planet>
-    
+    <app-planet [radius]="7e5" [texture]="textureSun"></app-planet>
+
     @for (planet of planets; track $index) {
         <app-planet [texture]="planet.img" [radius]="7e5">
             <app-orbit [rayon]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclination" [longNode]="planet.orbit.longNode"/>
-            <app-circular-animation [orbitRadius]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclination" [longNode]="planet.orbit.longNode" [initX]="planet.posX" [initY]="planet.posY" [orbitSpeed]="planet.orbit.revSpeed"/>
+            <app-circular-animation [dateSimu]="dateSimu" [speedMultiplier]="speed" [orbitRadius]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclination" [longNode]="planet.orbit.longNode" [initX]="planet.posX" [initY]="planet.posY" [orbitSpeed]="planet.orbit.revSpeed"/>
         </app-planet>
     }
 
