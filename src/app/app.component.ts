@@ -39,7 +39,8 @@ export class AppComponent {
             orbit: {
                 rayon: 57.9e6,
                 inclination: 0.12235,
-                longNode: 0.84369
+                longNode: 0.84369,
+                revSpeed: 8.267e-7
             }
         },
         {
@@ -55,6 +56,7 @@ export class AppComponent {
                 rayon: 108.2e6,
                 inclination: 0.05917,
                 longNode: 1.33819,
+                revSpeed: 3.236e-7
             }
         },
         {
@@ -70,6 +72,7 @@ export class AppComponent {
                 rayon: 149.6e6,
                 inclination: 0.0,
                 longNode: -0.08923,
+                revSpeed: 1.991e-7
             }
         },
         {
@@ -85,6 +88,7 @@ export class AppComponent {
                 rayon: 228.0e6,
                 inclination: 0.03229,
                 longNode: 49.7132,
+                revSpeed: 1.059e-7
             }
         },
         {
@@ -99,7 +103,8 @@ export class AppComponent {
             orbit: {
                 rayon: 779.3e6,
                 inclination: 0.02286,
-                longNode: 0.86766
+                longNode: 0.86766,
+                revSpeed: 1.679e-8
             }
         },
         {
@@ -114,7 +119,8 @@ export class AppComponent {
             orbit: {
                 rayon: 1427e6,
                 inclination: 0.04346,
-                longNode: 1.98339
+                longNode: 1.98339,
+                revSpeed: 6.758e-9
             }
         },
         {
@@ -130,6 +136,7 @@ export class AppComponent {
                 rayon: 2871e6,
                 inclination: 0.01344,
                 longNode: 1.29089,
+                revSpeed: 2.37e-9
             }
         },
         {
@@ -145,6 +152,7 @@ export class AppComponent {
                 rayon: 4497e6,
                 inclination: 0.03089,
                 longNode: 0.84369,
+                revSpeed: 1.18e-9
             }
         },
     ]
