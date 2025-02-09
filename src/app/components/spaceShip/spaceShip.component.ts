@@ -16,6 +16,7 @@ export class SpaceShipComponent implements SpaceObject {
     @Input() public posX: number = 0;
     @Input() public posY: number = 0;
     @Input() public posZ: number = 0;
+    @Input() public scale: number = 1;
 
 
     public modelLoaded!: Promise<void>;
@@ -42,13 +43,17 @@ export class SpaceShipComponent implements SpaceObject {
 
     get mesh(): Object3D<Object3DEventMap>[] {
         if (!this.gltf || !this.gltf.scene) return [];
-        this.gltf.scene.position.setX(0.05);
+
+        this.gltf.scene.position.set(this.posX * this.scale, this.posZ * this.scale, this.posY * this.scale);
+        this.gltf.scene.rotation.set(0, 45, 0)
+
         this.gltf.scene.scale.set(this.size, this.size, this.size);
+
         return [this.gltf.scene]
     }
 
     public animate(): void {
-        //TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        this.mesh
     }
 
 }

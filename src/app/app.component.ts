@@ -13,6 +13,7 @@ import { SolarWindService } from './service/solar-wind.service';
 import { FormsModule } from '@angular/forms';
 import { SpaceShipComponent } from './components/spaceShip/spaceShip.component';
 import { SolarWindMapComponent } from './components/solarWindMap/solarWindMap.component';
+import { SpaceShip } from './class/ship';
 
 @Component({
     selector: 'app-root',
@@ -23,11 +24,29 @@ import { SolarWindMapComponent } from './components/solarWindMap/solarWindMap.co
 export class AppComponent {
     public title = 'HighwindFrontend';
 
-      public speed = 1;
-      public dateSimu = new Date();
+    public speed = 1;
+    public dateSimu = new Date();
+
+    public readonly scale = 1e-8;
 
 
     public planets: Planet[] = [
+        {
+            img: "../../assets/textures/sun.jpg",
+            name: "Sun",
+            command:"sun",
+            mass: 1.9884e30,
+            radius: 7e5,
+            posX: 0,
+            posY: 0,
+            posZ: 0,
+            orbit: {
+                rayon: 0,
+                inclination: 0,
+                longNode: 0,
+                revSpeed: 0
+            }
+        },
         {
             img: "../../assets/textures/mercury.jpg",
             name: "Mercury",
@@ -158,6 +177,19 @@ export class AppComponent {
         },
     ]
 
+    public tempShip: SpaceShip = {
+        "mass": 1e6,
+        "positionX": -149.6e6,
+        "positionY": 1500,
+        "positionZ": 12000,
+        "vX": 0,
+        "vY": -28.33,
+        "vZ": 0,
+        "sailArea": 81,
+        "sailAngle": Math.PI*3/4,
+        "sailDeployed": false
+    }
+
     public textureSun = "../../assets/textures/sun.jpg";
     public textureEarth = "../../assets/textures/earth.jpg";
     public textureMercury = "../../assets/textures/mercury.jpg";
@@ -173,14 +205,13 @@ export class AppComponent {
     constructor(service: PlanetService, solarService: SolarWindService) {
         this.planetService = service
 
-        this.init();
+        this.init()
     }
 
     async init() {
-        console.log(await this.planetService.getPlanetsLocations(this.planets))
+        await this.planetService.getPlanetsLocations(this.planets)
     }
-
-  onSpeedChange(newSpeed: number) {
-    this.speed = newSpeed;
-  }
+    onSpeedChange(newSpeed: number) {
+        this.speed = newSpeed;
+    }
 }
