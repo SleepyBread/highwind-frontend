@@ -22,7 +22,7 @@ export class MenuComponent {
     @Output() public resetDate = new EventEmitter<boolean>();
     @Output() public displayVS = new EventEmitter<boolean>();
     @Output() public form = new EventEmitter<{masse:number, coordX:number, coordY:number, aireVoile:number, angleVoile:number}>();
-    public formData: {masse:number, coordX:number, coordY:number, aireVoile:number, angleVoile:number} = {masse:0, coordX:0, coordY:0, aireVoile:0, angleVoile:0};
+    public formData: {masse:number, coordX:number, coordY:number, aireVoile:number, angleVoile:number, vX:number, vY:number, vZ:number} = {masse:0, coordX:0, coordY:0, aireVoile:0, angleVoile:0, vX:0, vY:0, vZ:0};
 
     private displayVSMemory: boolean = false;
 
