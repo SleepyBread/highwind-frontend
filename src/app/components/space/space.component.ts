@@ -1,5 +1,5 @@
 import { Component, ContentChildren, ElementRef, Input, QueryList, ViewChild } from '@angular/core';
-import { PerspectiveCamera, WebGLRenderer, Scene, Color, DirectionalLight, AmbientLight } from "three";
+import { PerspectiveCamera, WebGLRenderer, Scene, Color, DirectionalLight, AmbientLight, DirectionalLightHelper } from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 import { PlanetComponent } from '../planet/planet.component';
@@ -7,6 +7,7 @@ import { StarsComponent } from '../stars/stars.component';
 import { SpaceShipComponent } from '../spaceShip/spaceShip.component';
 import { SolarWindService } from '../../service/solar-wind.service';
 import { temp } from 'three/src/nodes/TSL.js';
+import { SolarWindMapComponent } from '../solarWindMap/solarWindMap.component';
 
 @Component({
   selector: 'app-space',
@@ -18,6 +19,7 @@ export class SpaceComponent {
     @ContentChildren(PlanetComponent) planetChildren!: QueryList<PlanetComponent>;
     @ContentChildren(StarsComponent) starsChildren!: QueryList<StarsComponent>;
     @ContentChildren(SpaceShipComponent) spaceShips!: QueryList<SpaceShipComponent>;
+    @ContentChildren(SolarWindMapComponent) solarWindMaps!: QueryList<SolarWindMapComponent>;
     @Input() public orbitControls: boolean = true;
 
     private planetComponents: PlanetComponent[] = []
@@ -88,16 +90,17 @@ export class SpaceComponent {
     private addChildrens(): void {
 
         
-            // Ajoute une lumière directionnelle puissante
-            const light = new DirectionalLight(0xffffff, 3);
-            light.position.set(10, 10, 10);
-            this.scene.add(light);
-        
-            // Ajoute une lumière ambiante pour éviter un modèle totalement noir
-            const ambient = new AmbientLight(0xffffff, 2);
-            this.scene.add(ambient);
+        // Ajoute une lumière directionnelle puissante
+        const light = new DirectionalLight(0xffffff, 3);
+        light.position.set(10, 10, 10);
+        this.scene.add(light);
+    
+        // Ajoute une lumière ambiante pour éviter un modèle totalement noir
+        const ambient = new AmbientLight(0xffffff, 2);
+        this.scene.add(ambient);
 
-        
+
+            
         this.planetChildren.forEach(child => {
             if (!child.mesh) return;
             this.scene.add(...child.mesh);
