@@ -1,0 +1,7 @@
+{
+    "/planet-api": {
+        "target": "https://ssd.jpl.nasa.gov/api/horizons.api",
+        "secure": false,
+        "loglevel": "debug"
+    }
+}
