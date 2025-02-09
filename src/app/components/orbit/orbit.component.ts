@@ -38,7 +38,7 @@ export class OrbitComponent implements SpaceObject {
   
       const geometry = new BufferGeometry().setFromPoints(points);
       const material = new LineBasicMaterial({ color: this.color });
-      //this.meshObj = new Line(geometry, material);
+      this.meshObj = new Line(geometry, material);
     }
     
     get mesh(): Object3D[] {

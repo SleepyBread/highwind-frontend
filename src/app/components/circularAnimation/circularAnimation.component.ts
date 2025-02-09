@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { PlanetAnimation } from '../../core/models/animation.model';
 import { PlanetComponent } from '../planet/planet.component';
 import { Planet } from '../../class/planet';
+import { Clock } from 'three';
 
 @Component({
   selector: 'app-circular-animation',
@@ -22,9 +23,11 @@ export class CircularAnimationComponent implements PlanetAnimation {
 
     private angle: number = 0;
 
+    private clock = new Clock();
+
     public animate(planet: PlanetComponent): void {
-        this.angle += this.orbitSpeed * this.speedMultiplier;
-        let deltaAngle = this.getDeltaAngle()
+        this.angle += this.orbitSpeed * this.clock.getDelta() * this.speedMultiplier;
+        let deltaAngle = this.getDeltaAngle();
 
         const x = this.orbitRadius * this.scale * Math.cos(this.angle + deltaAngle); // Pos en X
         const y = this.orbitRadius * this.scale * Math.sin(this.angle + deltaAngle - this.longNode) * Math.sin(this.orbitalAngle); // Pos en Y
