@@ -15,6 +15,7 @@ export class OrbitComponent implements SpaceObject {
     @Input() segments: number = 64;
     @Input() color: string = '#ffffff'; // Couleur de la ligne
     @Input() orbitalAngle: number = 0; // Inclinaison orbitale en degrés
+    @Input() longNode: number = 0;
 
     public meshObj!: Line;
   
@@ -29,7 +30,7 @@ export class OrbitComponent implements SpaceObject {
       for (let i = 0; i <= this.segments; i++) {
         const theta = (i / this.segments) * Math.PI * 2; // Angle du cercle
         const x = this.rayon * this.scale * Math.cos(theta);
-        const y = this.rayon * this.scale * Math.sin(theta) * Math.sin(orbitalRad); // Applique l'angle orbital
+        const y = this.rayon * this.scale * Math.sin(theta - this.longNode) * Math.sin(orbitalRad); // Applique l'angle orbital
         const z = this.rayon * this.scale * Math.sin(theta);
   
         points.push(new Vector3(x, y, z));

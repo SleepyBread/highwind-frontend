@@ -3,8 +3,8 @@
     
     @for (planet of planets; track $index) {
         <app-planet [texture]="planet.img" [radius]="7e5">
-            <app-orbit [rayon]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclination"/>
-            <app-circular-animation [orbitRadius]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclination"/>
+            <app-orbit [rayon]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclination" [longNode]="planet.orbit.longNode"/>
+            <app-circular-animation [orbitRadius]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclination" [longNode]="planet.orbit.longNode"/>
         </app-planet>
     }
 
