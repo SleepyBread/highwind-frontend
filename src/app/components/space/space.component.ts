@@ -61,16 +61,15 @@ export class SpaceComponent {
     }
 
     private addChildrens(): void {
+
         this.planetChildren.forEach(child => {
-            console.log(child)
             if (!child.mesh) return;
-            this.scene.add(child.mesh);
+            this.scene.add(...child.mesh);
         });
 
         this.starsChildren.forEach(child => {
-            console.log(child)
             if (!child.mesh) return;
-            this.scene.add(child.mesh);
+            this.scene.add(...child.mesh);
         });
     }
 
