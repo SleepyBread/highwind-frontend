@@ -1,6 +1,6 @@
 
-<mat-grid-list cols="5" rowHeight="100%">
-  <mat-grid-tile>
+<mat-grid-list cols="6" rowHeight="100%">
+  <mat-grid-tile colspan="2">
     <app-menu [vitesse]="speed" [dateSimulatire]="dateSimu" (vitesseChange)="onSpeedChange($event)" (resetDate)="resetDateEvent($event)" (displayVS)="displayVSEvent($event)" (form)="formEvent($event)"></app-menu>
   </mat-grid-tile>
   <mat-grid-tile colspan="4">
