@@ -26,6 +26,8 @@ export class SpaceComponent {
     @Input() public speed: number = 1;
     @Input() public tempShip: SpaceShip = new SpaceShip();
     @Output() public tempShipChange = new EventEmitter<SpaceShip>();
+    @Input() public solarAccel: {ax: number, ay: number, az: number} = {ax:0, ay: 0, az: 0};
+    @Output() public solarAccelChange = new EventEmitter<{ax: number, ay: number, az: number}>();
 
     private planetComponents: PlanetComponent[] = []
     private spaceShipComponents: SpaceShipComponent[] = []
@@ -148,7 +150,10 @@ export class SpaceComponent {
     }
 
     private getShipAcceleration() {
-        let solarAccel = this.solarWindService.getShipAccel(this.tempShip)
+        this.solarAccel = this.solarWindService.getShipAccel(this.tempShip);
+        this.solarAccelChange.emit(this.solarAccel);
+        console.log(this.solarAccel);
+
         let gravityAccel = {ax:0, ay:0, az:0}
 
         for (let p in this.planetComponents) {
@@ -166,9 +171,9 @@ export class SpaceComponent {
         }
 
         return {
-            ax: solarAccel.ax + gravityAccel.ax,
-            ay: solarAccel.ay + gravityAccel.ay,
-            az: solarAccel.az + gravityAccel.az
+            ax: this.solarAccel.ax + gravityAccel.ax,
+            ay: this.solarAccel.ay + gravityAccel.ay,
+            az: this.solarAccel.az + gravityAccel.az
         }
     }
 }

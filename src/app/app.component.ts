@@ -28,6 +28,7 @@ export class AppComponent {
     public dateSimu = new Date();
 
     public readonly scale = 1e-8;
+    public solarAccel: {ax: number, ay: number, az: number} = {ax: 0, ay: 0, az: 0};
 
 
     public planets: Planet[] = [
@@ -183,7 +184,7 @@ export class AppComponent {
         "positionY": 1500,
         "positionZ": 12000,
         "vX": 0,
-        "vY": -28.33,
+        "vY": -18.33,
         "vZ": 0,
         "sailArea": 81,
         "sailAngle": Math.PI,
