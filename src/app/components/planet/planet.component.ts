@@ -26,7 +26,7 @@ export class PlanetComponent implements OnInit, SpaceObject {
     @Input() public posY: number = 0;
     @Input() public posZ: number = 0;
 
-
+    @Input() public mass: number = 0;
 
     private loader = new TextureLoader();
     public meshObj!: Mesh;
