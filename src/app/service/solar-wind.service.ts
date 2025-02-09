@@ -14,7 +14,7 @@ export class SolarWindService {
     "sailArea": 200,
     "sailAngle": Math.PI*3/4,
     "sailDeployed": false
-  } 
+  }
 
   getShipAccel(shipId:String) {
     // TODO : Get ship data from backend
