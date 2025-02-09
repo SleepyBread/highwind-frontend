@@ -7,7 +7,6 @@ import { StarsComponent } from '../stars/stars.component';
 
 @Component({
   selector: 'app-space',
-  imports: [],
   templateUrl: './space.component.html',
   styleUrl: './space.component.css'
 })
