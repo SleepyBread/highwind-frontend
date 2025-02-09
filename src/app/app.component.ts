@@ -1,4 +1,4 @@
-import { Component, QueryList, ViewChildren } from '@angular/core';
+import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
 import { PlanetComponent } from './components/planet/planet.component';
 import { SpaceComponent } from './components/space/space.component';
@@ -23,6 +23,7 @@ import { SpaceShip } from './class/ship';
 })
 export class AppComponent {
     public title = 'HighwindFrontend';
+    @ViewChild(SpaceComponent) private spaceComponent!: SpaceComponent;
 
       public speed = 1;
       public displaySolarMap:boolean = false;
@@ -221,7 +222,7 @@ export class AppComponent {
     }
 
     public resetDateEvent(ev: boolean) {
-        this.resetTemps = !this.resetTemps;
+        location.reload()
     }
 
     public displayVSEvent(ev: boolean) {
