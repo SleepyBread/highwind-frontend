@@ -4,8 +4,7 @@
     <app-menu [vitesse]="speed" [dateSimulatire]="dateSimu" (vitesseChange)="onSpeedChange($event)"  ></app-menu>
   </mat-grid-tile>
   <mat-grid-tile colspan="4">
-    <app-space>
-    <app-planet [radius]="7e5" [texture]="textureSun"></app-planet>
+    <app-space [(tempShip)]="tempShip" [(solarAccel)]="solarAccel" [speed]="speed">
 
     @for (planet of planets; track $index) {
         <app-planet [texture]="planet.img" [radius]="7e5" [mass]="planet.mass">
@@ -15,7 +14,7 @@
     }
 
     <app-solar-wind-map/>
-    <app-space-ship [size]="0.002" [posX]="1"/>
+    <app-space-ship [size]="0.01" [posX]="tempShip.positionX" [posY]="tempShip.positionY" [posZ]="tempShip.positionZ" [sailAngle]="tempShip.sailAngle" [scale]="scale" [solarAccel]="solarAccel"/>
     <app-stars [quantity]="100000"/>
 </app-space>
 </mat-grid-tile>
