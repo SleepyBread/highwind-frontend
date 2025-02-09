@@ -5,7 +5,7 @@
   </mat-grid-tile>
   <mat-grid-tile colspan="4">
     <app-space>
-    <app-planet [size]="7e5" [texture]="textureSun"></app-planet>
+    <app-planet [radius]="7e5" [texture]="textureSun"></app-planet>
     
     @for (planet of planets; track $index) {
         <app-planet [texture]="planet.img" [radius]="7e5">
@@ -14,6 +14,7 @@
         </app-planet>
     }
 
+    <app-space-ship [size]="0.002" [posX]="1"/>
     <app-stars [quantity]="100000"/>
 </app-space>
 </mat-grid-tile>

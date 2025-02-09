@@ -1,9 +1,10 @@
 import { Component, ContentChildren, ElementRef, Input, QueryList, ViewChild } from '@angular/core';
-import { PerspectiveCamera, WebGLRenderer, Scene, Color } from "three";
+import { PerspectiveCamera, WebGLRenderer, Scene, Color, DirectionalLight, AmbientLight } from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 import { PlanetComponent } from '../planet/planet.component';
 import { StarsComponent } from '../stars/stars.component';
+import { SpaceShipComponent } from '../spaceShip/spaceShip.component';
 
 @Component({
   selector: 'app-space',
@@ -14,6 +15,7 @@ export class SpaceComponent {
     @ViewChild('canvas', { static: true }) canvasElement!: ElementRef;
     @ContentChildren(PlanetComponent) planetChildren!: QueryList<PlanetComponent>;
     @ContentChildren(StarsComponent) starsChildren!: QueryList<StarsComponent>;
+    @ContentChildren(SpaceShipComponent) spaceShips!: QueryList<SpaceShipComponent>;
     @Input() public orbitControls: boolean = true;
 
     private scene!: Scene;
@@ -61,6 +63,17 @@ export class SpaceComponent {
 
     private addChildrens(): void {
 
+        
+            // Ajoute une lumière directionnelle puissante
+            const light = new DirectionalLight(0xffffff, 3);
+            light.position.set(10, 10, 10);
+            this.scene.add(light);
+        
+            // Ajoute une lumière ambiante pour éviter un modèle totalement noir
+            const ambient = new AmbientLight(0xffffff, 2);
+            this.scene.add(ambient);
+
+        
         this.planetChildren.forEach(child => {
             if (!child.mesh) return;
             this.scene.add(...child.mesh);
@@ -68,6 +81,12 @@ export class SpaceComponent {
 
         this.starsChildren.forEach(child => {
             if (!child.mesh) return;
+            this.scene.add(...child.mesh);
+        });
+
+        this.spaceShips.forEach(async child => {
+            await child.modelLoaded;    //On met un await parce que le modèle doit être loader
+            if (!child.mesh.length) return;
             this.scene.add(...child.mesh);
         });
     }
@@ -84,6 +103,12 @@ export class SpaceComponent {
             if (!child.animate) return;
             child.animate();
         });
+
+        this.spaceShips.forEach(child => {
+            if (!child.animate) return;
+            child.animate();
+        });
+
 
         this.renderer.render(this.scene, this.camera);
     }
