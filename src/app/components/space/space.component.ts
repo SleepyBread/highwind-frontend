@@ -60,7 +60,7 @@ export class SpaceComponent implements OnChanges {
         this.solarWindService = solar;
     }
 
-    private initThreeJs(): void {
+    public initThreeJs(): void {
         this.scene = new Scene();
         this.scene.background = new Color(0x000000);
     
