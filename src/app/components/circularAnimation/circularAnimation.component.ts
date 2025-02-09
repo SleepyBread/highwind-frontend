@@ -37,11 +37,12 @@ export class CircularAnimationComponent implements PlanetAnimation {
         this.dateSimu.setTime(Date.now() + this.timeElapsed - this.clock.elapsedTime);
         console.log(this.dateSimu);
 
-        const x = this.orbitRadius * this.scale * Math.cos(this.angle + deltaAngle); // Pos en X
-        const y = this.orbitRadius * this.scale * Math.sin(this.angle + deltaAngle - this.longNode) * Math.sin(this.orbitalAngle); // Pos en Y
-        const z = this.orbitRadius * this.scale * Math.sin(this.angle + deltaAngle); // Pos en Z
-
-        planet.meshObj.position.set(planet.posX + x, planet.posY + y, planet.posZ + z);
+        // Bonne chance :)
+        planet.posX = this.orbitRadius * Math.cos(this.angle + deltaAngle); // Pos en X
+        planet.posY = this.orbitRadius * Math.sin(this.angle + deltaAngle - this.longNode) * Math.sin(this.orbitalAngle); // Pos en Y
+        planet.posZ = this.orbitRadius * Math.sin(this.angle + deltaAngle); // Pos en Z
+    
+        planet.meshObj.position.set(planet.posX * this.scale, planet.posY * this.scale, planet.posZ * this.scale);
     }
 
     public getDeltaAngle():number {
@@ -56,5 +57,5 @@ export class CircularAnimationComponent implements PlanetAnimation {
       }
 
       return angle
-  }
+    }
 }

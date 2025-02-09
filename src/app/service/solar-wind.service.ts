@@ -7,10 +7,14 @@ export class SolarWindService {
 
   constructor() { }
 
-  private readonly tempShip = {
+  public readonly tempShip = {
     "mass": 1e4,
     "positionX": -1.496e11,
     "positionY": 1.496e11,
+    "positionZ": 0,
+    "vX": 0,
+    "vY": 0,
+    "vZ": 0,
     "sailArea": 200,
     "sailAngle": Math.PI*3/4,
     "sailDeployed": false
@@ -32,7 +36,8 @@ export class SolarWindService {
 
     let accel = {
       "ax": Math.cos(this.tempShip.sailAngle) * force / this.tempShip.mass,
-      "ay": Math.sin(this.tempShip.sailAngle) * force / this.tempShip.mass
+      "ay": Math.sin(this.tempShip.sailAngle) * force / this.tempShip.mass,
+      "az": 0
     }
 
     if (this.tempShip.positionX < 0) {

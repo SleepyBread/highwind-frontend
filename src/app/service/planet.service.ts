@@ -31,8 +31,6 @@ export class PlanetService {
         planets[p].posZ = decodedData["posZ"]
       }
     }
-
-    console.log(planets)
   }
 
   private decodeData(text:String) {

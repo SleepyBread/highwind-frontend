@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import { Component, QueryList, ViewChildren } from '@angular/core';
 
 import { PlanetComponent } from './components/planet/planet.component';
 import { SpaceComponent } from './components/space/space.component';
@@ -9,6 +9,7 @@ import { OrbitComponent } from './components/orbit/orbit.component';
 import { CircularAnimationComponent } from './components/circularAnimation/circularAnimation.component';
 import { PlanetService } from './service/planet.service';
 import { Planet } from './class/planet';
+import { SolarWindService } from './service/solar-wind.service';
 import { FormsModule } from '@angular/forms';
 import { SpaceShipComponent } from './components/spaceShip/spaceShip.component';
 import { SolarWindMapComponent } from './components/solarWindMap/solarWindMap.component';
@@ -21,15 +22,6 @@ import { SolarWindMapComponent } from './components/solarWindMap/solarWindMap.co
 })
 export class AppComponent {
     public title = 'HighwindFrontend';
-    private readonly planets_data: {[key: string]: any} = {
-        "Neptune": {
-          "command":"899",
-          "mass": 102.409e24,
-          "inclination": 0.03089,
-          "longNode": 0.84369,
-          "radius": 24622
-        },
-      }
 
       public speed = 1;
       public dateSimu = new Date();
@@ -178,10 +170,10 @@ export class AppComponent {
 
     private planetService: PlanetService
 
-    constructor(service: PlanetService) {
+    constructor(service: PlanetService, solarService: SolarWindService) {
         this.planetService = service
 
-        this.init()
+        this.init();
     }
 
     async init() {

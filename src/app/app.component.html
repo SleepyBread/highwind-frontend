@@ -8,7 +8,7 @@
     <app-planet [radius]="7e5" [texture]="textureSun"></app-planet>
 
     @for (planet of planets; track $index) {
-        <app-planet [texture]="planet.img" [radius]="7e5">
+        <app-planet [texture]="planet.img" [radius]="7e5" [mass]="planet.mass">
             <app-orbit [rayon]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclination" [longNode]="planet.orbit.longNode"/>
             <app-circular-animation [dateSimu]="dateSimu" [speedMultiplier]="speed" [orbitRadius]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclination" [longNode]="planet.orbit.longNode" [initX]="planet.posX" [initY]="planet.posY" [orbitSpeed]="planet.orbit.revSpeed"/>
         </app-planet>
