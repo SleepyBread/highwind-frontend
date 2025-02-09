@@ -28,14 +28,12 @@ export class CircularAnimationComponent implements PlanetAnimation {
     private timeElapsed: number = 0;
 
     public animate(planet: PlanetComponent): void {
-    //   console.log(this.speedMultiplier);
         let delta = this.clock.getDelta();
         this.angle -= this.orbitSpeed * delta * this.speedMultiplier;
         let deltaAngle = this.getDeltaAngle();
         this.timeElapsed += delta * this.speedMultiplier * 1000;
 
         this.dateSimu.setTime(Date.now() + this.timeElapsed - this.clock.elapsedTime);
-        // console.log(this.dateSimu);
 
         // Bonne chance :)
         planet.posX = this.orbitRadius * Math.cos(this.angle + deltaAngle); // Pos en X
