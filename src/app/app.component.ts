@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { PlanetComponent } from './components/planet/planet.component';
 import { SpaceComponent } from './components/space/space.component';
 import { StarsComponent } from './components/stars/stars.component';
+import {MatGridList, MatGridTile} from '@angular/material/grid-list';
+import {MenuComponent} from './components/Menu/menu/menu.component';
 import { OrbitComponent } from './components/orbit/orbit.component';
 import { CircularAnimationComponent } from './components/circularAnimation/circularAnimation.component';
 import { PlanetService } from './service/planet.service';
@@ -10,7 +12,7 @@ import { Planet } from './class/planet';
 
 @Component({
     selector: 'app-root',
-    imports: [SpaceComponent, PlanetComponent, StarsComponent, OrbitComponent, CircularAnimationComponent],
+    imports: [SpaceComponent, PlanetComponent, StarsComponent, OrbitComponent, CircularAnimationComponent, MatGridList, MatGridTile, MenuComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
@@ -166,17 +168,6 @@ export class AppComponent {
     public textureSaturn = "../../assets/textures/saturn.jpg";
     public textureUranus = "../../assets/textures/uranus.jpg";
     public textureNeptune = "../../assets/textures/neptune.jpg";
-
-
-    public inclinaisonOrbitRadercury = 0.122173;
-    public inclinaisonOrbitRadVenus = 0.05916666;
-    public inclinaisonOrbitRadEarth = 0;
-    public inclinaisonOrbitRadMars = 0.03228859;
-
-    public inclinaisonOrbitRadJupiter = 0.02275909;
-    public inclinaisonOrbitRadSaturn = 0.04337143;
-    public inclinaisonOrbitRadUranus = 0.01347394;
-    public inclinaisonOrbitRadNeptune = 0.03087487;
 
     private planetService: PlanetService
 
