@@ -29,6 +29,22 @@
         <input  matInput [(ngModel)]="formData.angleVoile" placeholder="100 rad">
     </mat-form-field>
 
+    <mat-form-field appearance="fill">
+        <mat-label>Vitesse X</mat-label>
+        <input  matInput [(ngModel)]="formData.vX" placeholder="100 rad">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Vitesse Z</mat-label>
+        <input  matInput [(ngModel)]="formData.vY" placeholder="100 rad">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Vitesse Z</mat-label>
+        <input  matInput [(ngModel)]="formData.vZ" placeholder="100 rad">
+    </mat-form-field>
+
+
     <button mat-flat-button (click)="formSimulation()">Envoyer</button>
 </div>
 
