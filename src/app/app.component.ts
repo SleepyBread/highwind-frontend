@@ -15,7 +15,7 @@ import { SolarWindMapComponent } from './components/solarWindMap/solarWindMap.co
 
 @Component({
     selector: 'app-root',
-    imports: [FormsModule,SpaceComponent, PlanetComponent, StarsComponent, OrbitComponent, CircularAnimationComponent, MatGridList, MatGridTile, MenuComponent, SpaceShipComponent],
+    imports: [FormsModule,SpaceComponent, PlanetComponent, StarsComponent, OrbitComponent, CircularAnimationComponent, MatGridList, MatGridTile, MenuComponent, SpaceShipComponent, SolarWindMapComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
