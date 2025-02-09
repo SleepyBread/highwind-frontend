@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Rediriger toutes les requêtes vers index.html, sauf pour les fichiers existants
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ /browser/index.html [L]
+
+    # Optionnel : Si tu veux ajouter des headers de cache pour les fichiers statiques
+    <FilesMatch "\.(js|css|html|json|svg|ttf|woff|woff2)$">
+        Header set Cache-Control "max-age=31536000, public"
+    </FilesMatch>
+</IfModule>
+
+# Configuration pour éviter l'accès direct aux fichiers du système
+<Files "prerendered-routes.json">
+    Require all denied
+</Files>

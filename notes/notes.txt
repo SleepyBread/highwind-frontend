@@ -1,0 +1,4 @@
+Pour publier l'application :
+- npm run build
+- Prendre le contenue du dossier "dist/HighwindFrontend/browser" et le mettre à la racine du serveur APACHE
+- Ajouter à la racine le .htaccess
