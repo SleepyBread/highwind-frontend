@@ -1,4 +1,10 @@
-<app-space>
+
+<mat-grid-list cols="5" rowHeight="100%">
+  <mat-grid-tile >
+    <app-menu></app-menu>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="4">
+    <app-space>
     <app-planet [size]="1" [texture]="textureSun"></app-planet>
     
     @for (planet of planets; track $index) {
@@ -10,3 +16,7 @@
 
     <app-stars [quantity]="100000"/>
 </app-space>
+  </mat-grid-tile>
+
+</mat-grid-list>
+
