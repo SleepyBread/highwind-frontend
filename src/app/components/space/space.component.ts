@@ -1,4 +1,4 @@
-import { Component, ContentChildren, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild } from '@angular/core';
+import { Component, ContentChildren, ElementRef, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild } from '@angular/core';
 import { PerspectiveCamera, WebGLRenderer, Scene, Color, DirectionalLight, AmbientLight, DirectionalLightHelper } from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
@@ -42,19 +42,6 @@ export class SpaceComponent implements OnChanges {
     private controls!: OrbitControls;
 
     private solarWindService: SolarWindService
-
-    public tempShip = {
-        "mass": 1e4,
-        "positionX": -1.496e11,
-        "positionY": 1.496e11,
-        "positionZ": 0,
-        "vX": 0,
-        "vY": 0,
-        "vZ": 0,
-        "sailArea": 200,
-        "sailAngle": Math.PI*3/4,
-        "sailDeployed": false
-    }
 
     public ngOnChanges(changes: SimpleChanges) {
         if (changes['displaySolarMaps']) {
@@ -182,7 +169,6 @@ export class SpaceComponent implements OnChanges {
     private getShipAcceleration() {
         this.solarAccel = this.solarWindService.getShipAccel(this.tempShip);
         this.solarAccelChange.emit(this.solarAccel);
-        console.log(this.solarAccel);
 
         let gravityAccel = {ax:0, ay:0, az:0}
 
@@ -231,27 +217,4 @@ export class SpaceComponent implements OnChanges {
         //TODO: Pour la simulation de la fusée, toutes les données sont dans "this.form"
     }
 
-    private removeSolarMap(){
-        if(!this.solarWindMaps) return;
-        this.solarWindMaps.forEach(child => {
-            if (!child.mesh) return;
-            this.scene.remove(...child.mesh);
-        });
-    }
-
-    private addSolarMap(){
-        this.solarWindMaps.forEach(child => {
-            this.scene.add(...child.mesh);
-        });
-    }
-
-    private resetTheTime(){
-        console.log("Reset le temps");
-        //TODO: Pour reset le temps
-    }
-
-    private receiveForm(){
-        console.log("Simulation : ", this.form);
-        //TODO: Pour la simulation de la fusée, toutes les données sont dans "this.form"
-    }
 }

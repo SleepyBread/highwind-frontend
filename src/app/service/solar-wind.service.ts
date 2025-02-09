@@ -13,8 +13,6 @@ export class SolarWindService {
     let distance = Math.sqrt((shipId.positionX*1000)**2 + (shipId.positionY*1000)**2)
     let sunAngle = 0
 
-    console.log(shipId)
-
     if (shipId.positionX < 1 && shipId.positionX > -1) {
       sunAngle = Math.PI
     } else {
