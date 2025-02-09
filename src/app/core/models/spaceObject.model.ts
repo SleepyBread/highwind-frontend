@@ -1,6 +1,5 @@
-import { Mesh, Points } from "three";
+import { Object3D } from "three";
 
 export interface SpaceObject {
-    get mesh() : Mesh | Points;
-    animate(): void;
+    get mesh() : Object3D[];
 }
