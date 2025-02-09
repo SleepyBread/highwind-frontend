@@ -77,7 +77,7 @@ export class PlanetService {
           'CENTER': '@sun',
           'START_TIME': new Date(Date.now()).toISOString(),
           'STOP_TIME': new Date(Date.now() + 1000).toISOString(),
-          'COMMAND': '199',
+          'COMMAND': this.planets_data[p]['command'],
           'format': 'text'
         },
         responseType: 'text',

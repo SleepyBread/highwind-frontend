@@ -24,4 +24,17 @@ export class AppComponent {
     public textureSaturn = "../../assets/textures/saturn.jpg";
     public textureUranus = "../../assets/textures/uranus.jpg";
     public textureNeptune = "../../assets/textures/neptune.jpg";
+
+    private planetService: PlanetService
+
+    constructor(service: PlanetService) {
+      this.planetService = service
+
+      this.init()
+    }
+
+    private async init() {
+      let planets = await this.planetService.getPlanetsLocations()
+      console.log(planets)
+    }
 }
