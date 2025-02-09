@@ -1,15 +1,12 @@
 <app-space>
     <app-planet [size]="1" [texture]="textureSun"></app-planet>
     
-    <app-planet [texture]="textureMercury" [size]="0.1" [animations]="animation" [orbitRadius]="1.5"/>
-    <app-planet [texture]="textureVenus" [size]="0.2" [animations]="animation" [orbitRadius]="2.5"/>
-    <app-planet [texture]="textureEarth" [size]="0.4" [animations]="animation" [orbitRadius]="3.5"/>
-    <app-planet [texture]="textureMars" [size]="0.2" [animations]="animation" [orbitRadius]="4.5"/>
+    @for (planet of planets; track $index) {
+        <app-planet [texture]="planet.img" [size]="planet.size">
+            <app-orbit [rayon]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclinaison"/>
+            <app-circular-animation [orbitRadius]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclinaison"/>
+        </app-planet>
+    }
 
-    <app-planet [texture]="textureJupiter" [size]="0.6" [animations]="animation" [orbitRadius]="7.5"/>
-    <app-planet [texture]="textureSaturn" [size]="0.3" [animations]="animation" [orbitRadius]="9"/>
-    <app-planet [texture]="textureUranus" [size]="0.2" [animations]="animation" [orbitRadius]="11"/>
-    <app-planet [texture]="textureNeptune" [size]="0.2" [animations]="animation" [orbitRadius]="15"/>
-
-    <app-stars [quantity]="1000000"/>
+    <app-stars [quantity]="100000"/>
 </app-space>

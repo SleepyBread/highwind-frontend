@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BufferGeometry, Float32BufferAttribute, MathUtils, Points, PointsMaterial } from "three";
+import { BufferGeometry, Float32BufferAttribute, MathUtils, Object3D, Points, PointsMaterial } from "three";
 import { SpaceObject } from '../../core/models/spaceObject.model';
 
 @Component({
@@ -54,8 +54,8 @@ export class StarsComponent implements OnInit, SpaceObject {
         this.stars = new Points(this.geometry, this.material);
     }
   
-    public get mesh(): Points {
-        return this.stars;
+    public get mesh(): Object3D[] {
+        return [this.stars];
     }
 
     public animate(): void {}
