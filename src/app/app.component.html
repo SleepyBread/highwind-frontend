@@ -1,45 +1,12 @@
 <app-space>
     <app-planet [size]="1" [texture]="textureSun"></app-planet>
     
-    <app-planet [texture]="textureMercury" [size]="0.1">
-        <app-orbit [rayon]="1.5"/>
-        <app-circular-animation [orbitRadius]="1.5" [orbitalAngle]="0.8"/>
-    </app-planet>
-
-    <app-planet [texture]="textureVenus" [size]="0.2">
-        <app-orbit [rayon]="2.5"/>
-        <app-circular-animation [orbitRadius]="2.5"/>
-    </app-planet>
-
-    <app-planet [texture]="textureEarth" [size]="0.4">
-        <app-orbit [rayon]="3.5"/>
-        <app-circular-animation [orbitRadius]="3.5"/>
-    </app-planet>
-
-    <app-planet [texture]="textureMars" [size]="0.2">
-        <app-orbit [rayon]="4.5"/>
-        <app-circular-animation [orbitRadius]="4.5"/>
-    </app-planet>
-
-    <app-planet [texture]="textureJupiter" [size]="0.6">
-        <app-orbit [rayon]="7.5"/>
-        <app-circular-animation [orbitRadius]="7.5"/>
-    </app-planet>
-
-    <app-planet [texture]="textureSaturn" [size]="0.3">
-        <app-orbit [rayon]="9"/>
-        <app-circular-animation [orbitRadius]="9"/>
-    </app-planet>
-
-    <app-planet [texture]="textureUranus" [size]="0.2">
-        <app-orbit [rayon]="11"/>
-        <app-circular-animation [orbitRadius]="11"/>
-    </app-planet>
-
-    <app-planet [texture]="textureNeptune" [size]="0.2">
-        <app-orbit [rayon]="15"/>
-        <app-circular-animation [orbitRadius]="15"/>
-    </app-planet>
+    @for (planet of planets; track $index) {
+        <app-planet [texture]="planet.img" [size]="planet.size">
+            <app-orbit [rayon]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclinaison"/>
+            <app-circular-animation [orbitRadius]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclinaison"/>
+        </app-planet>
+    }
 
     <app-stars [quantity]="100000"/>
 </app-space>
