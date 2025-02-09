@@ -162,65 +162,15 @@ export class AppComponent {
     public textureUranus = "../../assets/textures/uranus.jpg";
     public textureNeptune = "../../assets/textures/neptune.jpg";
 
-    public tempShip = {
-        "mass": 1e4,
-        "positionX": -1.496e11,
-        "positionY": 1.496e11,
-        "positionZ": 0,
-        "vX": 0,
-        "vY": 0,
-        "vZ": 0,
-        "sailArea": 200,
-        "sailAngle": Math.PI*3/4,
-        "sailDeployed": false
-    }
-
     private planetService: PlanetService
-    private solarWindService: SolarWindService
-
-    @ViewChildren(PlanetComponent) components!: QueryList<PlanetComponent>
-    private planetComponents: PlanetComponent[]
 
     constructor(service: PlanetService, solarService: SolarWindService) {
         this.planetService = service
-        this.solarWindService = solarService
-        this.planetComponents = []
 
         this.init();
     }
 
-    ngAfterViewInit() {
-        this.planetComponents = this.components.toArray();
-    }
-
     async init() {
         console.log(await this.planetService.getPlanetsLocations(this.planets))
-        console.log(this.getShipAcceleration())
-    }
-
-    private getShipAcceleration() {
-        let solarAccel = this.solarWindService.getShipAccel("id")
-        let gravityAccel = {ax:0, ay:0, az:0}
-
-        for (let p in this.planetComponents) {
-            let x = this.planetComponents[p].posX - this.tempShip.positionX
-            let y = this.planetComponents[p].posY - this.tempShip.positionY
-            let z = this.planetComponents[p].posZ - this.tempShip.positionZ
-
-            let distance = Math.sqrt(x**2 + y**2 + z**2)
-
-            let force = 6.67e-11 * this.tempShip.mass * this.planetComponents[p].mass / (distance**2)
-            console.log(z)
-
-            gravityAccel.ax += force * x / (this.tempShip.mass * distance)
-            gravityAccel.ay += force * y / (this.tempShip.mass * distance)
-            gravityAccel.az += force * z / (this.tempShip.mass * distance)
-        }
-
-        return {
-            ax: solarAccel.ax + gravityAccel.ax,
-            ay: solarAccel.ay + gravityAccel.ay,
-            az: solarAccel.az + gravityAccel.az
-        }
     }
 }
