@@ -79,7 +79,7 @@ export class SpaceComponent implements OnChanges {
     private InitOrbitControls(){
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.controls.enableDamping = true;
-        this.controls.enablePan = false;
+        // this.controls.enablePan = false;
         this.controls.dampingFactor = 0.25;
         this.controls.screenSpacePanning = false;
     }
