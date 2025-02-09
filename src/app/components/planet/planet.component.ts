@@ -6,11 +6,12 @@ import { CircularAnimationComponent } from '../circularAnimation/circularAnimati
 
 @Component({
   selector: 'app-planet',
-  imports: [],
   templateUrl: './planet.component.html',
   styleUrl: './planet.component.css'
 })
 export class PlanetComponent implements OnInit, SpaceObject {
+
+    private readonly scale = 1e-8
 
     @ContentChildren(OrbitComponent, { descendants: true }) orbits?: QueryList<OrbitComponent>;
     @ContentChildren(CircularAnimationComponent, { descendants: true }) circularAnimations?: QueryList<CircularAnimationComponent>;
@@ -18,7 +19,7 @@ export class PlanetComponent implements OnInit, SpaceObject {
     @Input() public rotate: boolean = true;
     @Input() public rotationSpeedX: number = 0.00;
     @Input() public rotationSpeedY: number = 0.001;
-    @Input() public size: number = 1;
+    @Input() public radius: number = 1;
     @Input() public texture: string = "../../assets/textures/earth.jpg";
 
     @Input() public posX: number = 0;
@@ -37,7 +38,7 @@ export class PlanetComponent implements OnInit, SpaceObject {
     }
 
     public ngOnInit(): void {
-        const geometry = new SphereGeometry(this.size, 32, 16 );
+        const geometry = new SphereGeometry(this.radius*2*this.scale, 32, 16 );
         const material = new MeshBasicMaterial({ map: this.loader.load(this.texture) });
         this.meshObj = new Mesh(geometry, material);
         this.meshObj.position.set(this.posX, this.posY, this.posZ);

@@ -1,12 +1,12 @@
 <app-space>
-    <app-planet [size]="1" [texture]="textureSun"></app-planet>
+    <app-planet [radius]="7e5" [texture]="textureSun"></app-planet>
     
     @for (planet of planets; track $index) {
-        <app-planet [texture]="planet.img" [size]="planet.size">
-            <app-orbit [rayon]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclinaison"/>
-            <app-circular-animation [orbitRadius]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclinaison"/>
+        <app-planet [texture]="planet.img" [radius]="7e5">
+            <app-orbit [rayon]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclination"/>
+            <app-circular-animation [orbitRadius]="planet.orbit.rayon" [orbitalAngle]="planet.orbit.inclination"/>
         </app-planet>
     }
 
-    <app-stars [quantity]="100000"/>
+    <app-stars [quantity]="10000"/>
 </app-space>

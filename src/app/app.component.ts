@@ -5,19 +5,8 @@ import { SpaceComponent } from './components/space/space.component';
 import { StarsComponent } from './components/stars/stars.component';
 import { OrbitComponent } from './components/orbit/orbit.component';
 import { CircularAnimationComponent } from './components/circularAnimation/circularAnimation.component';
-
-
-export class Orbit {
-    public rayon: number = 0;
-    public inclinaison: number = 0;
-}
-
-export class Planet {
-    public img: string = "../../assets/textures/earth.jpg";
-    public size: number = 1;
-    public orbit!: Orbit;
-}
-
+import { PlanetService } from './service/planet.service';
+import { Planet } from './class/planet';
 
 @Component({
     selector: 'app-root',
@@ -27,70 +16,135 @@ export class Planet {
 })
 export class AppComponent {
     public title = 'HighwindFrontend';
+    private readonly planets_data: {[key: string]: any} = {
+        "Neptune": {
+          "command":"899",
+          "mass": 102.409e24,
+          "inclination": 0.03089,
+          "longNode": 0.84369,
+          "radius": 24622
+        },
+      }
 
     public planets: Planet[] = [
         {
             img: "../../assets/textures/mercury.jpg",
-            size: 0.1,
+            name: "Mercury",
+            command:"199",
+            mass: 3.302e23,
+            radius: 2439.7,
+            posX: 0,
+            posY: 0,
+            posZ: 0,
             orbit: {
-                rayon: 1.5,
-                inclinaison: 0.122173
+                rayon: 57.9e6,
+                inclination: 0.12235,
+                longNode: 0.84369
             }
         },
         {
             img: "../../assets/textures/venus.jpg",
-            size: 0.2,
+            name: "Venus",
+            command:"299",
+            mass: 48.685e23,
+            radius: 6051.8,
+            posX: 0,
+            posY: 0,
+            posZ: 0,
             orbit: {
-                rayon: 2.5,
-                inclinaison: 0.05916666
+                rayon: 108.2e6,
+                inclination: 0.05917,
+                longNode: 1.33819,
             }
         },
         {
             img: "../../assets/textures/earth.jpg",
-            size: 0.4,
+            name: "Earth",
+            command:"399",
+            mass: 5.97219e24,
+            radius: 6371.0,
+            posX: 0,
+            posY: 0,
+            posZ: 0,
             orbit: {
-                rayon: 3.5,
-                inclinaison: 0
+                rayon: 149.6e6,
+                inclination: 0.0,
+                longNode: -0.08923,
             }
         },
         {
             img: "../../assets/textures/mars.jpg",
-            size: 0.2,
+            name: "Mars",
+            command:"499",
+            mass: 6.4171e23,
+            radius: 3389.5,
+            posX: 0,
+            posY: 0,
+            posZ: 0,
             orbit: {
-                rayon: 4.5,
-                inclinaison: 0.03228859
+                rayon: 228.0e6,
+                inclination: 0.03229,
+                longNode: 49.7132,
             }
         },
         {
             img: "../../assets/textures/jupiter.jpg",
-            size: 0.6,
+            name: "Jupiter",
+            command:"599",
+            mass: 18.9819e26,
+            radius: 69911,
+            posX: 0,
+            posY: 0,
+            posZ: 0,
             orbit: {
-                rayon: 7.5,
-                inclinaison: 0.02275909
+                rayon: 779.3e6,
+                inclination: 0.02286,
+                longNode: 0.86766
             }
         },
         {
             img: "../../assets/textures/saturn.jpg",
-            size: 0.3,
+            name: "Saturn",
+            command:"699",
+            mass: 5.6834e26,
+            radius: 58232,
+            posX: 0,
+            posY: 0,
+            posZ: 0,
             orbit: {
-                rayon: 9,
-                inclinaison: 0.04337143
+                rayon: 1427e6,
+                inclination: 0.04346,
+                longNode: 1.98339
             }
         },
         {
             img: "../../assets/textures/uranus.jpg",
-            size: 0.2,
+            name: "Uranus",
+            command:"799",
+            mass: 86.813e24,
+            radius: 25362,
+            posX: 0,
+            posY: 0,
+            posZ: 0,
             orbit: {
-                rayon: 11,
-                inclinaison: 0.01347394
+                rayon: 2871e6,
+                inclination: 0.01344,
+                longNode: 1.29089,
             }
         },
         {
             img: "../../assets/textures/neptune.jpg",
-            size: 0.2,
+            name: "Neptune",
+            command:"899",
+            mass: 102.409e24,
+            radius: 24622,
+            posX: 0,
+            posY: 0,
+            posZ: 0,
             orbit: {
-                rayon: 15,
-                inclinaison: 0.03087487
+                rayon: 4497e6,
+                inclination: 0.03089,
+                longNode: 0.84369,
             }
         },
     ]
@@ -116,7 +170,15 @@ export class AppComponent {
     public inclinaisonOrbitRadUranus = 0.01347394;
     public inclinaisonOrbitRadNeptune = 0.03087487;
 
+    private planetService: PlanetService
 
+    constructor(service: PlanetService) {
+        this.planetService = service
 
+        this.init()
+    }
 
+    async init() {
+        console.log(await this.planetService.getPlanetsLocations(this.planets))
+    }
 }
