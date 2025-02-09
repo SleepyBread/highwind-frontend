@@ -35,13 +35,17 @@
 <hr>
 
 <div class="center-div">
-  <p>Date de la démo :</p>
-  {{dateSimulatire.toDateString()}}
+    {{dateSimulatire.toDateString()}}
 
-  <p>Résultat :</p>
-  <mat-form-field appearance="fill">
-    <mat-label>Vitesse</mat-label>
-    <input [(ngModel)]="vitesse" (ngModelChange)="onVitesseChange($event)" type="number"  matInput placeholder="100">
-  </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Vitesse</mat-label>
+        <input [(ngModel)]="vitesse" (ngModelChange)="onVitesseChange($event)" type="number"  matInput placeholder="100">
+    </mat-form-field>
+
+    <div style="display: flex;">
+        <button mat-flat-button (click)="onReset()">Reset</button>
+        <button mat-flat-button (click)="onDisplayVS()">Afficher vents solaires</button>    
+    </div>
+
 </div>
 

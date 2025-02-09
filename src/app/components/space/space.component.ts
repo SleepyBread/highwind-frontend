@@ -1,12 +1,11 @@
-import { Component, ContentChildren, ElementRef, Input, QueryList, ViewChild } from '@angular/core';
-import { PerspectiveCamera, WebGLRenderer, Scene, Color, DirectionalLight, AmbientLight, DirectionalLightHelper } from "three";
+import { Component, ContentChildren, ElementRef, Input, OnChanges, QueryList, SimpleChanges, ViewChild } from '@angular/core';
+import { PerspectiveCamera, WebGLRenderer, Scene, Color, DirectionalLight, AmbientLight } from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 import { PlanetComponent } from '../planet/planet.component';
 import { StarsComponent } from '../stars/stars.component';
 import { SpaceShipComponent } from '../spaceShip/spaceShip.component';
 import { SolarWindService } from '../../service/solar-wind.service';
-import { temp } from 'three/src/nodes/TSL.js';
 import { SolarWindMapComponent } from '../solarWindMap/solarWindMap.component';
 
 @Component({
@@ -14,13 +13,15 @@ import { SolarWindMapComponent } from '../solarWindMap/solarWindMap.component';
   templateUrl: './space.component.html',
   styleUrl: './space.component.css'
 })
-export class SpaceComponent {
+export class SpaceComponent implements OnChanges {
     @ViewChild('canvas', { static: true }) canvasElement!: ElementRef;
     @ContentChildren(PlanetComponent) planetChildren!: QueryList<PlanetComponent>;
     @ContentChildren(StarsComponent) starsChildren!: QueryList<StarsComponent>;
     @ContentChildren(SpaceShipComponent) spaceShips!: QueryList<SpaceShipComponent>;
     @ContentChildren(SolarWindMapComponent) solarWindMaps!: QueryList<SolarWindMapComponent>;
     @Input() public orbitControls: boolean = true;
+    @Input() public displaySolarMaps: boolean = false;
+    @Input() public resetTime: boolean = false;
 
     private planetComponents: PlanetComponent[] = []
     private spaceShipComponents: SpaceShipComponent[] = []
@@ -45,8 +46,18 @@ export class SpaceComponent {
         "sailDeployed": false
     }
 
+    public ngOnChanges(changes: SimpleChanges) {
+        if (changes['displaySolarMaps']) {
+            if(!this.displaySolarMaps) this.removeSolarMap();
+            else this.addSolarMap();
+        }
+        if (changes['resetTime']) {
+            this.resetTheTime();
+        }
+    }
+    
     constructor(solar: SolarWindService) {
-        this.solarWindService = solar
+        this.solarWindService = solar;
     }
 
     private initThreeJs(): void {
@@ -100,7 +111,6 @@ export class SpaceComponent {
         this.scene.add(ambient);
 
 
-            
         this.planetChildren.forEach(child => {
             if (!child.mesh) return;
             this.scene.add(...child.mesh);
@@ -157,7 +167,7 @@ export class SpaceComponent {
             let distance = Math.sqrt(x**2 + y**2 + z**2)
 
             let force = 6.67e-11 * this.tempShip.mass * this.planetComponents[p].mass / (distance**2)
-            console.log(z)
+            // console.log(z)
 
             gravityAccel.ax += force * x / (this.tempShip.mass * distance)
             gravityAccel.ay += force * y / (this.tempShip.mass * distance)
@@ -169,5 +179,24 @@ export class SpaceComponent {
             ay: solarAccel.ay + gravityAccel.ay,
             az: solarAccel.az + gravityAccel.az
         }
+    }
+
+    private removeSolarMap(){
+        if(!this.solarWindMaps) return;
+        this.solarWindMaps.forEach(child => {
+            if (!child.mesh) return;
+            this.scene.remove(...child.mesh);
+        });
+    }
+
+    private addSolarMap(){
+        this.solarWindMaps.forEach(child => {
+            this.scene.add(...child.mesh);
+        });
+    }
+
+    private resetTheTime(){
+        console.log("Reset le temps");
+        //TODO: Pour reset le temps
     }
 }

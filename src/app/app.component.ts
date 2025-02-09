@@ -3,8 +3,8 @@ import { Component, QueryList, ViewChildren } from '@angular/core';
 import { PlanetComponent } from './components/planet/planet.component';
 import { SpaceComponent } from './components/space/space.component';
 import { StarsComponent } from './components/stars/stars.component';
-import {MatGridList, MatGridTile} from '@angular/material/grid-list';
-import {MenuComponent} from './components/Menu/menu/menu.component';
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import { MenuComponent } from './components/Menu/menu/menu.component';
 import { OrbitComponent } from './components/orbit/orbit.component';
 import { CircularAnimationComponent } from './components/circularAnimation/circularAnimation.component';
 import { PlanetService } from './service/planet.service';
@@ -24,6 +24,8 @@ export class AppComponent {
     public title = 'HighwindFrontend';
 
       public speed = 1;
+      public displaySolarMap:boolean = false;
+      public resetTemps:boolean = false;
       public dateSimu = new Date();
 
 
@@ -177,10 +179,19 @@ export class AppComponent {
     }
 
     async init() {
-        console.log(await this.planetService.getPlanetsLocations(this.planets))
+        // console.log(await this.planetService.getPlanetsLocations(this.planets))
     }
 
-  onSpeedChange(newSpeed: number) {
-    this.speed = newSpeed;
-  }
+    public onSpeedChange(newSpeed: number) {
+        this.speed = newSpeed;
+    }
+
+    public resetDateEvent(ev: boolean) {
+        this.resetTemps = !this.resetTemps;
+    }
+
+    public displayVSEvent(ev: boolean) {
+        this.displaySolarMap = ev;
+    }
+
 }
