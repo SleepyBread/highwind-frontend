@@ -10,10 +10,11 @@ import { CircularAnimationComponent } from './components/circularAnimation/circu
 import { PlanetService } from './service/planet.service';
 import { Planet } from './class/planet';
 import { SolarWindService } from './service/solar-wind.service';
+import { SpaceShipComponent } from './components/spaceShip/spaceShip.component';
 
 @Component({
     selector: 'app-root',
-    imports: [SpaceComponent, PlanetComponent, StarsComponent, OrbitComponent, CircularAnimationComponent, MatGridList, MatGridTile, MenuComponent],
+    imports: [SpaceComponent, PlanetComponent, StarsComponent, OrbitComponent, CircularAnimationComponent, MatGridList, MatGridTile, MenuComponent, SpaceShipComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
