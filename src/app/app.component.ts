@@ -10,16 +10,21 @@ import { CircularAnimationComponent } from './components/circularAnimation/circu
 import { PlanetService } from './service/planet.service';
 import { Planet } from './class/planet';
 import { SolarWindService } from './service/solar-wind.service';
+import { FormsModule } from '@angular/forms';
 import { SpaceShipComponent } from './components/spaceShip/spaceShip.component';
 
 @Component({
     selector: 'app-root',
-    imports: [SpaceComponent, PlanetComponent, StarsComponent, OrbitComponent, CircularAnimationComponent, MatGridList, MatGridTile, MenuComponent, SpaceShipComponent],
+    imports: [FormsModule,SpaceComponent, PlanetComponent, StarsComponent, OrbitComponent, CircularAnimationComponent, MatGridList, MatGridTile, MenuComponent, SpaceShipComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
 export class AppComponent {
     public title = 'HighwindFrontend';
+
+      public speed = 1;
+      public dateSimu = new Date();
+
 
     public planets: Planet[] = [
         {
@@ -173,4 +178,8 @@ export class AppComponent {
     async init() {
         console.log(await this.planetService.getPlanetsLocations(this.planets))
     }
+
+  onSpeedChange(newSpeed: number) {
+    this.speed = newSpeed;
+  }
 }
