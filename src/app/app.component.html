@@ -1,10 +1,11 @@
 
 <mat-grid-list cols="5" rowHeight="100%">
-  <mat-grid-tile >
-    <app-menu [vitesse]="speed" [dateSimulatire]="dateSimu" (vitesseChange)="onSpeedChange($event)"  ></app-menu>
+  <mat-grid-tile>
+    <app-menu [vitesse]="speed" [dateSimulatire]="dateSimu" (vitesseChange)="onSpeedChange($event)" (resetDate)="resetDateEvent($event)" (displayVS)="displayVSEvent($event)" (form)="formEvent($event)"></app-menu>
   </mat-grid-tile>
   <mat-grid-tile colspan="4">
-    <app-space [(tempShip)]="tempShip" [(solarAccel)]="solarAccel" [speed]="speed">
+    <app-space [displaySolarMaps]="displaySolarMap" [resetTime]="resetTemps" [form]="formSimulation" [(tempShip)]="tempShip" [(solarAccel)]="solarAccel" [speed]="speed">
+    <app-planet [radius]="7e5" [texture]="textureSun"></app-planet>
 
     @for (planet of planets; track $index) {
         <app-planet [texture]="planet.img" [radius]="7e5" [mass]="planet.mass">

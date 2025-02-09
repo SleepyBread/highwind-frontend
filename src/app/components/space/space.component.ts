@@ -1,4 +1,4 @@
-import { Component, ContentChildren, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild } from '@angular/core';
+import { Component, ContentChildren, ElementRef, EventEmitter, Input, OnChanges, Output, QueryList, SimpleChanges, ViewChild } from '@angular/core';
 import { PerspectiveCamera, WebGLRenderer, Scene, Color, DirectionalLight, AmbientLight, DirectionalLightHelper } from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
@@ -15,7 +15,7 @@ import { temp } from 'three/src/nodes/TSL.js';
   templateUrl: './space.component.html',
   styleUrl: './space.component.css'
 })
-export class SpaceComponent {
+export class SpaceComponent implements OnChanges {
     @ViewChild('canvas', { static: true }) canvasElement!: ElementRef;
     @ContentChildren(PlanetComponent) planetChildren!: QueryList<PlanetComponent>;
     @ContentChildren(StarsComponent) starsChildren!: QueryList<StarsComponent>;
@@ -23,6 +23,10 @@ export class SpaceComponent {
     @ContentChildren(SolarWindMapComponent) solarWindMaps!: QueryList<SolarWindMapComponent>;
 
     @Input() public orbitControls: boolean = true;
+    @Input() public displaySolarMaps: boolean = false;
+    @Input() public resetTime: boolean = false;
+    @Input() public form: {masse:number, coordX:number, coordY:number, aireVoile:number, angleVoile:number} | null = null;
+
     @Input() public speed: number = 1;
     @Input() public tempShip: SpaceShip = new SpaceShip();
     @Output() public tempShipChange = new EventEmitter<SpaceShip>();
@@ -39,8 +43,21 @@ export class SpaceComponent {
 
     private solarWindService: SolarWindService
 
+    public ngOnChanges(changes: SimpleChanges) {
+        if (changes['displaySolarMaps']) {
+            if(!this.displaySolarMaps) this.removeSolarMap();
+            else this.addSolarMap();
+        }
+        if (changes['resetTime']) {
+            this.resetTheTime();
+        }
+        if (changes['form']) {
+            this.receiveForm();
+        }
+    }
+    
     constructor(solar: SolarWindService) {
-        this.solarWindService = solar
+        this.solarWindService = solar;
     }
 
     private initThreeJs(): void {
@@ -152,7 +169,6 @@ export class SpaceComponent {
     private getShipAcceleration() {
         this.solarAccel = this.solarWindService.getShipAccel(this.tempShip);
         this.solarAccelChange.emit(this.solarAccel);
-        console.log(this.solarAccel);
 
         let gravityAccel = {ax:0, ay:0, az:0}
 
@@ -176,4 +192,29 @@ export class SpaceComponent {
             az: this.solarAccel.az + gravityAccel.az
         }
     }
+
+    private removeSolarMap(){
+        if(!this.solarWindMaps) return;
+        this.solarWindMaps.forEach(child => {
+            if (!child.mesh) return;
+            this.scene.remove(...child.mesh);
+        });
+    }
+
+    private addSolarMap(){
+        this.solarWindMaps.forEach(child => {
+            this.scene.add(...child.mesh);
+        });
+    }
+
+    private resetTheTime(){
+        console.log("Reset le temps");
+        //TODO: Pour reset le temps
+    }
+
+    private receiveForm(){
+        console.log("Simulation : ", this.form);
+        //TODO: Pour la simulation de la fusée, toutes les données sont dans "this.form"
+    }
+
 }
