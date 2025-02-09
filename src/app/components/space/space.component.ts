@@ -22,6 +22,7 @@ export class SpaceComponent implements OnChanges {
     @Input() public orbitControls: boolean = true;
     @Input() public displaySolarMaps: boolean = false;
     @Input() public resetTime: boolean = false;
+    @Input() public form: {masse:number, coordX:number, coordY:number, aireVoile:number, angleVoile:number} | null = null;
 
     private planetComponents: PlanetComponent[] = []
     private spaceShipComponents: SpaceShipComponent[] = []
@@ -53,6 +54,9 @@ export class SpaceComponent implements OnChanges {
         }
         if (changes['resetTime']) {
             this.resetTheTime();
+        }
+        if (changes['form']) {
+            this.receiveForm();
         }
     }
     
@@ -198,5 +202,10 @@ export class SpaceComponent implements OnChanges {
     private resetTheTime(){
         console.log("Reset le temps");
         //TODO: Pour reset le temps
+    }
+
+    private receiveForm(){
+        console.log("Simulation : ", this.form);
+        //TODO: Pour la simulation de la fusée, toutes les données sont dans "this.form"
     }
 }

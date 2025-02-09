@@ -27,6 +27,7 @@ export class AppComponent {
       public displaySolarMap:boolean = false;
       public resetTemps:boolean = false;
       public dateSimu = new Date();
+      public formSimulation: any;
 
 
     public planets: Planet[] = [
@@ -192,6 +193,10 @@ export class AppComponent {
 
     public displayVSEvent(ev: boolean) {
         this.displaySolarMap = ev;
+    }
+
+    public formEvent(data: any) {
+        this.formSimulation = { ...data };
     }
 
 }

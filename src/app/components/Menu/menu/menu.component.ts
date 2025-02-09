@@ -21,6 +21,8 @@ export class MenuComponent {
     @Output() public vitesseChange = new EventEmitter<number>();
     @Output() public resetDate = new EventEmitter<boolean>();
     @Output() public displayVS = new EventEmitter<boolean>();
+    @Output() public form = new EventEmitter<{masse:number, coordX:number, coordY:number, aireVoile:number, angleVoile:number}>();
+    public formData: {masse:number, coordX:number, coordY:number, aireVoile:number, angleVoile:number} = {masse:0, coordX:0, coordY:0, aireVoile:0, angleVoile:0};
 
     private displayVSMemory: boolean = false;
 
@@ -35,5 +37,9 @@ export class MenuComponent {
     public onDisplayVS() {
         this.displayVSMemory = !this.displayVSMemory;
         this.displayVS.emit(this.displayVSMemory);
+    }
+
+    public formSimulation() {
+        if(this.formData) this.form.emit(this.formData); 
     }
 }
