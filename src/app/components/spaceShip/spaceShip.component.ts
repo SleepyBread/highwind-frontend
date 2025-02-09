@@ -16,6 +16,7 @@ export class SpaceShipComponent implements SpaceObject {
     @Input() public posX: number = 0;
     @Input() public posY: number = 0;
     @Input() public posZ: number = 0;
+    @Input() public sailAngle: number = 0;
     @Input() public scale: number = 1;
 
 
@@ -45,7 +46,7 @@ export class SpaceShipComponent implements SpaceObject {
         if (!this.gltf || !this.gltf.scene) return [];
 
         this.gltf.scene.position.set(this.posX * this.scale, this.posZ * this.scale, this.posY * this.scale);
-        this.gltf.scene.rotation.set(0, 45, 0)
+        this.gltf.scene.rotation.set(0, this.sailAngle * 180 / Math.PI, 0)
 
         this.gltf.scene.scale.set(this.size, this.size, this.size);
 

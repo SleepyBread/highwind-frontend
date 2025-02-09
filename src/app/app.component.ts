@@ -186,7 +186,7 @@ export class AppComponent {
         "vY": -28.33,
         "vZ": 0,
         "sailArea": 81,
-        "sailAngle": Math.PI*3/4,
+        "sailAngle": Math.PI,
         "sailDeployed": false
     }
 
