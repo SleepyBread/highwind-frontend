@@ -24,8 +24,4 @@ export class AppComponent {
     public textureSaturn = "../../assets/textures/saturn.jpg";
     public textureUranus = "../../assets/textures/uranus.jpg";
     public textureNeptune = "../../assets/textures/neptune.jpg";
-
-    constructor(service: PlanetService) {
-      service.getPlanetsLocations()
-    }
 }
