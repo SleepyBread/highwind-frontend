@@ -1,18 +1,27 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Rediriger toutes les requêtes vers index.html, sauf pour les fichiers existants
+    # Rediriger les requêtes Angular vers index.html, sauf pour les fichiers existants
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^ /browser/index.html [L]
 
-    # Optionnel : Si tu veux ajouter des headers de cache pour les fichiers statiques
+    # Proxy pour l'API de la NASA
+    RewriteCond %{REQUEST_URI} ^/planet-api
+    RewriteRule ^planet-api/(.*)$ https://ssd.jpl.nasa.gov/api/horizons.api/$1 [P,L]
+
+    # Optionnel : Ajout d'en-têtes CORS pour éviter les erreurs de restrictions
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type"
+
+    # Optionnel : Cache des fichiers statiques pour améliorer les performances
     <FilesMatch "\.(js|css|html|json|svg|ttf|woff|woff2)$">
         Header set Cache-Control "max-age=31536000, public"
     </FilesMatch>
 </IfModule>
 
-# Configuration pour éviter l'accès direct aux fichiers du système
+# Sécurité : Bloquer l'accès direct aux fichiers sensibles
 <Files "prerendered-routes.json">
     Require all denied
 </Files>
