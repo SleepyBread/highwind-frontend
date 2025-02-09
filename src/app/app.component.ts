@@ -11,10 +11,11 @@ import { PlanetService } from './service/planet.service';
 import { Planet } from './class/planet';
 import { FormsModule } from '@angular/forms';
 import { SpaceShipComponent } from './components/spaceShip/spaceShip.component';
+import { SolarWindMapComponent } from './components/solarWindMap/solarWindMap.component';
 
 @Component({
     selector: 'app-root',
-    imports: [FormsModule,SpaceComponent, PlanetComponent, StarsComponent, OrbitComponent, CircularAnimationComponent, MatGridList, MatGridTile, MenuComponent, SpaceShipComponent],
+    imports: [FormsModule,SpaceComponent, PlanetComponent, StarsComponent, OrbitComponent, CircularAnimationComponent, MatGridList, MatGridTile, MenuComponent, SpaceShipComponent, SolarWindMapComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
