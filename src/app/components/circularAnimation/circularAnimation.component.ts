@@ -26,7 +26,7 @@ export class CircularAnimationComponent implements PlanetAnimation {
     private clock = new Clock();
 
     public animate(planet: PlanetComponent): void {
-        this.angle += this.orbitSpeed * this.clock.getDelta() * this.speedMultiplier;
+        this.angle -= this.orbitSpeed * this.clock.getDelta() * this.speedMultiplier;
         let deltaAngle = this.getDeltaAngle();
 
         const x = this.orbitRadius * this.scale * Math.cos(this.angle + deltaAngle); // Pos en X
