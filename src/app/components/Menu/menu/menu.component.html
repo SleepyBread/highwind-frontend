@@ -1,58 +1,63 @@
 <div class="center-div">
     <img id="logo" src="../../assets/img/logo.webp" alt="">
 
-    <br>
-
     <h2>Simulation Vaisseau Spatial :</h2>
-    <mat-form-field appearance="fill">
-        <mat-label>Masse</mat-label>
-        <input matInput [(ngModel)]="formData.masse" placeholder="Masse">
-    </mat-form-field>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Coordonnée X</mat-label>
-        <input matInput [(ngModel)]="formData.coordX" placeholder="100">
-    </mat-form-field>
+    <div style="display: flex;">
+        <mat-form-field appearance="fill">
+            <mat-label>Masse</mat-label>
+            <input matInput [(ngModel)]="formData.masse" placeholder="Masse">
+        </mat-form-field>
+        <div style="width: 20px;"></div>
+        <mat-form-field appearance="fill">
+            <mat-label>Coordonnée X</mat-label>
+            <input matInput [(ngModel)]="formData.coordX" placeholder="100">
+        </mat-form-field>
+    </div>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Coordonnée Y</mat-label>
-        <input matInput [(ngModel)]="formData.coordY" placeholder="100">
-    </mat-form-field>
+    <div style="display: flex;">
+        <mat-form-field appearance="fill">
+            <mat-label>Coordonnée Y</mat-label>
+            <input matInput [(ngModel)]="formData.coordY" placeholder="100">
+        </mat-form-field>    
+        <div style="width: 20px;"></div>
+        <mat-form-field appearance="fill">
+            <mat-label>Aire de la voile</mat-label>
+            <input matInput [(ngModel)]="formData.aireVoile" placeholder="100 m2">
+        </mat-form-field>    
+    </div>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Aire de la voile</mat-label>
-        <input matInput [(ngModel)]="formData.aireVoile" placeholder="100 m2">
-    </mat-form-field>
+    <div style="display: flex;">
+        <mat-form-field appearance="fill">
+            <mat-label>Angle voile</mat-label>
+            <input  matInput [(ngModel)]="formData.angleVoile" placeholder="100 rad">
+        </mat-form-field>    
+        <div style="width: 20px;"></div>
+        <mat-form-field appearance="fill">
+            <mat-label>Vitesse X</mat-label>
+            <input  matInput [(ngModel)]="formData.vX" placeholder="100 rad">
+        </mat-form-field>    
+    </div>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Angle voile</mat-label>
-        <input  matInput [(ngModel)]="formData.angleVoile" placeholder="100 rad">
-    </mat-form-field>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Vitesse X</mat-label>
-        <input  matInput [(ngModel)]="formData.vX" placeholder="100 rad">
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-        <mat-label>Vitesse Z</mat-label>
-        <input  matInput [(ngModel)]="formData.vY" placeholder="100 rad">
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-        <mat-label>Vitesse Z</mat-label>
-        <input  matInput [(ngModel)]="formData.vZ" placeholder="100 rad">
-    </mat-form-field>
-
+    <div style="display: flex;">
+        <mat-form-field appearance="fill">
+            <mat-label>Vitesse Z</mat-label>
+            <input  matInput [(ngModel)]="formData.vY" placeholder="100 rad">
+        </mat-form-field>    
+        <div style="width: 20px;"></div>
+        <mat-form-field appearance="fill">
+            <mat-label>Vitesse Z</mat-label>
+            <input  matInput [(ngModel)]="formData.vZ" placeholder="100 rad">
+        </mat-form-field>    
+    </div>
 
     <button mat-flat-button (click)="formSimulation()">Envoyer</button>
-</div>
 
-<hr>
+    <hr>
 
-<div class="center-div">
     {{dateSimulatire.toDateString()}}
-
+    
     <mat-form-field appearance="fill">
         <mat-label>Vitesse</mat-label>
         <input [(ngModel)]="vitesse" (ngModelChange)="onVitesseChange($event)" type="number"  matInput placeholder="100">
@@ -60,8 +65,8 @@
 
     <div style="display: flex;">
         <button mat-flat-button (click)="onReset()">Reset</button>
+        <div style="width: 20px;"></div>
         <button mat-flat-button (click)="onDisplayVS()">Afficher vents solaires</button>    
     </div>
-
+    
 </div>
-
